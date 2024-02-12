@@ -35,7 +35,7 @@ class MarketingCloud:
         params = {
             'response_type': 'code',
             'client_id': self.client_id,
-            'redirect_uri': 'https://depin-41bb7d8ad196.herokuapp.com',
+            'redirect_uri': 'https://de-import-ease-0d07ab40f787.herokuapp.com',
             'scope': 'data_extensions_read data_extensions_write',
             'state': 'active'
         }
@@ -50,7 +50,7 @@ class MarketingCloud:
         "code": code,
         "client_id": self.client_id,
         "client_secret": self.client_secret,
-        "redirect_uri": "https://depin-41bb7d8ad196.herokuapp.com",
+        "redirect_uri": "https://de-import-ease-0d07ab40f787.herokuapp.com",
         "scope": "data_extensions_read data_extensions_write"
         }
 
