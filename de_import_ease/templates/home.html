@@ -4,1357 +4,20 @@
 <html>
 <head>
     <meta name="csrf-token" content="{{ csrf_token }}">
-
-    <style>
-.drag-drop-area {
-    padding: 70px 70px;  /* Increase vertical padding for more central positioning */
-    border: 4px dashed #ccc;
-    text-align: center;
-    position: relative;
-    transition: background-color 0.3s ease-in-out;
-    height: 300px;  /* Added fixed height to ensure consistency */
-    border-radius: 15px; 
-}
-
-.drag-drop-title {
-    font-size: 28px;  /* Increase font size */
-    font-weight: bold;
-    margin-top: -30px;  /* Adjust margin to center text more */
-}
-
-.h-50 {
-    height: 50% !important;
-}
-
-
-.decimal-inputs-container {
-    display: flex;
-    gap: 10px;
-    width: auto;       /* Ensure it occupies the full width of its container */
-    overflow: hidden;  /* Hide any child elements that overflow the container */
-}
-
-.decimal-input {
-    width: 70px !important;  /* Adjust this width as needed to fit both inputs */
-    flex: none;
-}
-
-thead th {
-    background-color: #ededed !important;
-    color:#212529;
-}
-
-/* Make table data cells white */
-td {
-    background-color: white;
-}
-
-/* Change the background color of header and data cells to light gray when hovered over */
-tr:hover th, tr:hover td {
-    background-color: #ededed !important;
-}
-
-/* New/Updated styles for rounded border */
-.table {
-    border-collapse: separate; /* Resets to default value; essential for border-spacing to work */
-    border-spacing: 0; /* Eliminates spacing between cells */
-    border: 2px solid darkgray; /* This creates a border around the table */
-    border-radius: 10px;
-}
-
-.table th, .table td {
-padding-bottom: 20px !important;
-    padding-top: 25px !important;
-    line-height: 170% !important;
-padding-left: 15px !important;
-}
-
-.custom-control-input:checked~.custom-control-label::before {
-    border-color: #be3134 !important;
-    background-color:  #be3134 !important;
-}
-
-.form-check-input[type="radio"] {
-    position: relative;
-    appearance: none;   /* Remove default appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #be3134;
-    border-radius: 50%;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.form-check-label {
-    padding-left: 10px !important;
-}
-
-
-.form-check-input[type="radio"]:not(:checked) {
-    border-color: black !important;  /* For unchecked radios */
-}
-
-.form-check-input[type="radio"]:checked {
-    border-color: #be3134 !important;  /* Border color when checked */
-}
-
-.form-check-input[type="radio"]:checked::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #be3134 !important;  /* Inner circle color when selected */
-}
-
-.form-check-input[type="radio"]:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #be3134 !important;  /* Inner circle color when checked */
-}
-
-
-
-/* Remove default radio button style */
-.form-check-input[type="radio"]:checked {
-    background-color: transparent;
-    border-color: currentColor;
-}
-
-
-/* These handle the rounded corners for the table */
-.table thead th:first-child {
-    border-top-left-radius: 10px; 
-}
-
-.table thead th:last-child {
-    border-top-right-radius: 10px;
-}
-
-.table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-.table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
-
-.table-bordered thead th {
-    border-bottom: none; /* This removes the double border between header and body cells */
-}
-
-.form-check {
-    padding-bottom: 10px !important;
-        display: flex !important;
-    align-items: center; /* Vertical centering */
-}
-
-#resetOnImport {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-top: -3px; /* To help with vertical alignment */
-}
-
-.align-checkbox {
-    margin-left: 80px; /* Adjust this value based on the exact left offset of the periodLength textbox */
-}
-
-    .drag-drop-area:hover {
-        background-color: #f8f9fa;
-    }
-
-    .loading-message {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 20px;
-    }
-
-.error-message {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    text-align: center;  /* center the text and the icon */
-}
-
-.bi-x-circle-fill {
-    font-size: 40px; /* Increase the size of the ban icon */
-}
-
-.bi-check-circle-fill {
-    font-size: 50px; /* Increase the size of the ban icon */
-}
-
-    /* Logo Styling */
-.logo {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 150px; /* Adjust as necessary */
-}
-
-input[type="checkbox"]:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-/* Centered content within the red shape */
-.center-content {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centering method */
-    text-align: center; /* Align the text to the center */
-    z-index: 2; /* Ensure it's above the red shape */
-}
-
-.center-content h1 {
-    color: white; /* Adjust as needed */
-    font-size: 24px; /* Adjust as needed */
-    margin-bottom: 15px; /* Space between the title and the paragraph */
-}
-
-.center-content p {
-    color: white; /* Adjust as needed */
-    font-size: 16px; /* Adjust as needed */
-    margin: 0 auto; /* Center the paragraph if it's narrower than the container */
-}
-
-    .file-input {
-        display: none;
-    }
-
-    button, input, select, textarea {
-    font-family: 'Roboto', sans-serif;
-}
-
-    body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #dae1e7;
-    margin: 0;  /* Ensures no default margin/padding on the body */
-
-}
-
-.save_button_div {
-    width: 100%;
-    height: 160px;
-    padding-top: 45px;
-    padding-bottom: 50px;
-}
-
-.save_button_div .save_button {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px !important; /* Or whatever you want */
-    padding: 10px 20px; /* Adjust the padding to make the button text/contents look centered */
-    color: #fff;
-    background: linear-gradient(to right, #be3134, #ff645a) !important;
-    border-color: #be3134 !important;
-    font-size: 25px;
-    font-weight: 400;
-}
-
-.main-wrapper {
-    position: relative; 
-    min-height: 600px; /* or whatever height you find suitable */
-    height: calc(100vh - 20px); 
-}
-
-.white-rounded {
-    background-color: white;
-    border-radius: 15px;
-    margin: 20px;
-    padding: 80px;  /* Increased padding to 80px */
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2; /* Make sure it stays on top of the red shape */
-    margin-top: 90px; /* push the white box lower */
-    width: calc(100% - 60px);
-}
-
-
-.bg-red-shade {
-    background: linear-gradient(to bottom right, #be3134 0%, #f64d50 100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1; /* Positioned behind the white box */
-    height: calc(100vh - 65%); /* slightly increased the height */
-    position: relative; /* make it a reference for the pseudo-element */
-    overflow: hidden; /* hide the overflow to ensure the pseudo-element doesn't extend beyond */
-    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 70% 100%, 30% 100%, 0% 85%);
-}
-
-.bg-red-shade::after {
-    content: "";
-    position: absolute;
-    bottom: -25px; /* adjust this to move the circular element up or down */
-    left: 25%;  /* adjust this to move the circular element left or right */
-    right: 25%; /* adjust together with the left property to control the width of the circle */
-    height: 50px; /* control the height of the circle */
-    border-radius: 50%; /* make it circular */
-    z-index: 2; /* ensures it's above the red-shade but below the white-rounded */
-}
-
-.drag-drop-icon {
-    font-size: 40px; /* Adjust size as per your needs */
-    color: #333; /* Adjust color as per your needs */
-    text-align: center; /* Center the icon */
-    margin-bottom: 40px; /* Spacing between the icon and the title */
-}
-
-}
-.pin, .pin-y {
-    top: 0;
-    bottom: 0;
-}
-
-.rounded-rectangle {
-    border: 2px solid #dee2e6 !important; /* Change the color as needed */
-    border-radius: 10px; /* Adjust as needed */
-    padding: 20px; /* Add some space inside the rectangle */
-    margin-bottom: 20px; /* Optional: adds some space below the rectangle */
-}
-
-#go_back {color: black;
-    display: block;
-    background-color: transparent;
-    border-color: black;
-    border: 2px solid #dee2e6 !important;
-    border-radius: 10px;
-    width: 150px;}
-
-.lightgray-text {
-    font-size: 0.8em;      /* Makes text size smaller */
-    color: #898b8d;     /* Makes text color light gray */
-    margin-top: 0.5em;    /* Add a little spacing on top for better visual separation */
-}
-
-.pin {
-    right: 0;
-    left: 0;
-}
-.absolute {
-    position: absolute;
-}
-
-.success-message {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    text-align: center;
-}
-
-
-h1, h2 {
-    font-weight: 700; /* bold */
-}
-
-h3, h4 {
-    font-weight: 500; /* medium */
-}
-
-p, span, a {
-    font-weight: 400; /* regular */
-}
-</style>
- <script>
-
-let counter = 1;
-let initialFormState = null; 
-let lastSavedFormState = {
-    switchState: false,
-    periodLength: '',
-    periodUnit: '',
-    retentionDate: '',
-    dataRetentionStrategy: '',
-    retentionPeriod: '',
-    resetOnImport: false,
-    name: '',
-    customerKey: ''
-};
-let lastImportedData = null;
-
-function serializeForm(form) {
-    let obj = {};
-    new FormData(form).forEach((value, key) => {
-        if (obj[key] !== undefined) {
-            if (!Array.isArray(obj[key])) {
-                obj[key] = [obj[key]];
-            }
-            obj[key].push(value);
-        } else {
-            obj[key] = value;
-        }
-    });
-    return obj;
-}
-
-
-
-let messageTimeoutId;
-
-function displayError(title, message) {
-    clearTimeout(messageTimeoutId);
-    const errorMessageDiv = document.querySelector('.error-message');
-    const errorTitle = errorMessageDiv.querySelector('h4');
-    const errorParagraph = errorMessageDiv.querySelector('p');
-    const successMessageDiv = document.querySelector('.success-message');
-    const dragDropContent = document.querySelector('.drag-drop-content');
-
-    successMessageDiv.style.display = 'none'; // Hide success message
-    errorTitle.textContent = title;
-    errorParagraph.textContent = message;
-    errorMessageDiv.style.display = 'block';
-    dragDropContent.style.display = "none";
-
-    messageTimeoutId = setTimeout(() => {
-        errorMessageDiv.style.display = 'none';
-        dragDropContent.style.display = "block";
-    }, 5000);
-}
-
-function displaySuccess(title, message) {
-    clearTimeout(messageTimeoutId);
-    const successMessageDiv = document.querySelector('.success-message');
-    const successTitle = document.querySelector('#success-title');
-    const successParagraph = document.querySelector('#success-message');
-    const errorMessageDiv = document.querySelector('.error-message');
-    const dragDropContent = document.querySelector('.drag-drop-content');
-
-    errorMessageDiv.style.display = 'none'; // Hide error message
-    successTitle.textContent = title;
-    successParagraph.textContent = message;
-    successMessageDiv.style.display = 'block';
-    dragDropContent.style.display = "none";
-
-    messageTimeoutId = setTimeout(() => {
-        successMessageDiv.style.display = 'none';
-        dragDropContent.style.display = "block";
-    }, 5000);
-}
-
-
-function removeFieldRow(button) {
-    const row = button.closest('tr');
-    const tableBody = row.parentNode;  // Get the parent node (table body) before removing the row
-    row.remove(); 
-}
-
-function handleDropdownChange(event) {
-    const dropdown = event.target;
-    const row = dropdown.closest('tr');
-
-    const decimalInputsContainer = row.querySelector('.decimal-inputs-container');
-    const fieldLengthInput = row.querySelector('input.field-length-input');
-
-    if (dropdown.value === 'Decimal') {
-        fieldLengthInput.hidden = true;
-        decimalInputsContainer.hidden = false;
-    } else {
-        decimalInputsContainer.hidden = true;
-        fieldLengthInput.hidden = false;
-    }
-}
-
-
-function addFieldRow(event, button) {
-    event.preventDefault();
-
-    const tableBody = button.closest('tbody');
-
-    // The row containing the clicked button
-    const currentRow = button.closest('tr');
-
-    // Create a new row element
-    const newRow = document.createElement('tr');
-
-    // Populate the row's cells
-    newRow.innerHTML = generateFieldDate('', 'Text', '50');
-
-    // If there's a next row, insert before it; otherwise, just append the new row
-    if (currentRow.nextElementSibling) {
-        tableBody.insertBefore(newRow, currentRow.nextElementSibling);
-    } else {
-        tableBody.appendChild(newRow);
-    }
-}
-
-
-
-
-
-function isValidFileExtension(filename) {
-    const validExtensions = ['.txt', '.csv'];
-    const fileExtension = filename.split('.').pop();
-    const isValid = validExtensions.includes('.' + fileExtension.toLowerCase());
-
-    if (!isValid) {
-        displayError("File type not supported!", "Only .csv and .txt extensions are allowed!");
-        return false;
-    }
-
-    return isValid;
-}
-
-    function handleDragOver(evt) {
-        evt.preventDefault();
-    }
-
-
-function handleDrop(evt) {
-    evt.preventDefault();
-
-    const fileInput = document.querySelector('.file-input');
-    const dragDropContent = document.querySelector('.drag-drop-content');
-    const loadingMessage = document.querySelector('.loading-message');
-    const successMessageDiv = document.querySelector('.success-message');
-    successMessageDiv.style.display = "none"; 
-
-    if (evt.dataTransfer.items) {
-        if (evt.dataTransfer.items[0].kind === 'file') {
-            const file = evt.dataTransfer.items[0].getAsFile();
-            fileInput.files = evt.dataTransfer.files;
-        }
-    } else {
-        fileInput.files = evt.dataTransfer.files;
-    }
-
-    // Check the file size
-    const isFileSizeValid = checkFileSize(fileInput);
-
-    // Check file extension
-    const isFileExtensionValid = isValidFileExtension(fileInput.files[0].name);
-
-
- if (isFileSizeValid && isFileExtensionValid) {
-       sendFileToServer(evt.target.closest('form'));
-
-        loadingMessage.style.display = "block";
-        dragDropContent.style.display = "none";
-    } else {
-        // If client-side validation fails, show error using AJAX
-        loadingMessage.style.display = "none";
-    }
-}
-
-function sendFileToServer(form) {
-    const formData = new FormData(form);
-    var csrfToken = document.querySelector('#uploadForm input[name="csrfmiddlewaretoken"]').value;
-    const loadingMessage = document.querySelector('.loading-message');
-    const dragDropContent = document.querySelector('.drag-drop-content');
-    const data_retention = document.querySelector('#data_retention');
-    const data_extension_properties = document.querySelector('#data_extension_properties');
-    const save_form = document.querySelector('#save_form');
-
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRFToken': csrfToken,
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-
-        loadingMessage.style.display = "none";
-        lastImportedData = data;
-
-        if (data.status === 'success') {
-            data_retention.style.display = "block";
-            data_extension_properties.style.display = "block";
-            save_form.style.display = "block";
-            dragDropContent.style.display = "none";
-            populateData(data.field_types,data.field_lengths, data.anomalies_report);
-            displaySuccess("File successfully imported", "Drag and drop a new file to replace it");
-        } else if (data.status === 'error') {
-            displayError(data.message);  // Define this function to handle errors.
-        }
-    })
-    .catch(error => {
-        loadingMessage.style.display = "none";
-        console.error('Error:', error);
-        // Handle unexpected errors (network issues, server errors, etc.)
-    });
-}
-
-function getFieldLengthForType(type) {
-    const lengths = {
-        'Locale': '5',
-        'Phone': '50',
-        'Email': '254'
-    };
-    return lengths[type] || ''; // returns an empty string if the type is not found in the lengths object
-}
-
-function populateData(field_types, field_lengths, anomalies_report,field_required, field_primary_key) {
-    // Populating Field Data
-    document.getElementById('field_data_div').style.display = 'block';
-    const fieldsTableBody = document.querySelector('#field_data_div .table-striped tbody');
-    fieldsTableBody.innerHTML = '';  // clear previous rows
-    let fieldsTableHTML = "";
-    let fieldRequired = "";
-    let fieldPrimaryKey = "";
-
-    for (let fieldName in field_types) {
-        let fieldType = field_types[fieldName];
-        if (field_required) {
-            fieldRequired = field_required[fieldName];
-        }
-        if (field_primary_key) {
-            fieldPrimaryKey = field_primary_key[fieldName];
-        }
-        let fieldLength = field_lengths.hasOwnProperty(fieldName) ? field_lengths[fieldName] : '';  // Get length or default to an empty string
-        fieldLength = fieldLength || getFieldLengthForType(fieldType);
-        fieldsTableHTML += generateFieldDate(fieldName, fieldType, fieldLength,fieldRequired, fieldPrimaryKey);        
-    }
-    fieldsTableBody.innerHTML = fieldsTableHTML;
-
-    // Populating Anomalies Report
-        document.getElementById('notes_div').style.display = 'block';
-        document.getElementById('notes_div').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-        const notesTableBody = document.querySelector('#notes_div .table-bordered tbody');
-        let notesTableHTML = "";
-        
-        for (let key in anomalies_report) {
-            for (let anomaly of anomalies_report[key]) {
-                notesTableHTML += generateNoteRow(anomaly);
-            }
-        }
-        
-        notesTableBody.innerHTML = notesTableHTML;
-    }
-
-
-function generateFieldDate(fieldName, fieldType, fieldLength,field_required, field_primary_key) {
-    const isDecimal = fieldType === "Decimal";
-    const disabled = (fieldType !== "Text" && !isDecimal) ? "disabled" : "";
-    const hidden = isDecimal ? "hidden" : "";
-    let requiredChecked = "";
-    let primaryKeyChecked = "";
-
-    if (field_required) {
-        requiredChecked = "checked";
-    }
-    if (field_primary_key) {
-        primaryKeyChecked = "checked";
-    }
-
-    let integerPart = 18; // Default value
-    let decimalPart = 0; // Default value
-    if (isDecimal) {
-        if (typeof fieldLength === 'string') {
-            // If it's a string, split it
-            [integerPart, decimalPart] = fieldLength.split(',').map(num => parseInt(num, 10));
-        } else if (Array.isArray(fieldLength)) {
-            // If it's an array (tuple in Python, represented as an array in JavaScript), destructure it
-            [integerPart, decimalPart] = fieldLength;
-        } else {
-            // Default values if fieldLength is neither a string nor an array
-            integerPart = 18;
-            decimalPart = 0;
-        }
-    }
-
-
-
-
-    let rowHTML = `
-        <tr>
-            <td style="text-align:center;vertical-align: middle;">
-                <button class="btn btn-success btn-sm" type="button" onclick="addFieldRow(event, this)"><i class="bi bi-plus"></i></button>
-            </td>
-            <td>
-                <input type="text" class="form-control" id="field_name_${counter}" name="field_name_${counter}" value="${fieldName}" required>
-            </td>
-            <td>
-                <select id="field_type_${counter}" name="field_type_${counter}" class="form-control" onchange="updateFieldLengthInput(this);">
-                    <option value="Text" ${fieldType == "Text" ? "selected" : ""}>Text</option>
-                    <option value="Number" ${fieldType == "Number" ? "selected" : ""}>Number</option>
-                    <option value="Phone" ${fieldType == "Phone" ? "selected" : ""}>Phone</option>
-                    <option value="Email" ${fieldType == "Email" ? "selected" : ""}>Email</option>
-                    <option value="Locale" ${fieldType == "Locale" ? "selected" : ""}>Locale</option>
-                    <option value="Boolean" ${fieldType == "Boolean" ? "selected" : ""}>Boolean</option>
-                    <option value="Decimal" ${fieldType == "Decimal" ? "selected" : ""}>Decimal</option>
-                    <option value="Date" ${fieldType == "Date" ? "selected" : ""}>Date</option>
-                </select>
-            </td>
-    <td>
-            <div style="display: flex; justify-content: space-between;">
-                <input type="text" class="form-control field-length-input" id="field_lengths_${counter}" name="field_lengths_${counter}" value="${fieldLength}" ${disabled} onkeydown="onlyAllowNumericInput(event);" ${hidden}>
-                <div class="decimal-inputs-container" ${!isDecimal ? "hidden" : ""}>
-                    <input type="number" class="form-control decimal-input" id="field_lengths_${counter}_integer" name="field_lengths_${counter}_integer" value="${integerPart}" placeholder="Integers" ${!isDecimal ? "hidden" : ""}>
-                    <input type="number" class="form-control decimal-input" id="field_lengths_${counter}_decimal" name="field_lengths_${counter}_decimal" value="${decimalPart}" placeholder="Decimals" ${!isDecimal ? "hidden" : ""}>
-                </div>
-            </div>
-    </td>
-            <td style="text-align:center; vertical-align: middle;">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" style="height: 28px;" id="field_required_${counter}" name="field_required_${counter}" class="form-control" ${requiredChecked}>
-                </div>
-            </td>
-            <td style="text-align:center; height: 28px; vertical-align: middle;">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" style="height: 28px;" class="form-control" id="field_primary_${counter}" name="field_primary_${counter}" value="true" onchange="updatePrimaryKey(this);" ${primaryKeyChecked}>
-                </div>
-            </td>
-            <td style="text-align:center;vertical-align: middle;">
-                <button class="btn btn-danger btn-sm" type="button" onclick="removeFieldRow(this)"><i class="bi bi-trash"></i></button>
-            </td>
-        </tr>
-    `;
-
-    counter++; // Increment the counter for next row
-    return rowHTML;
-}
-
-function generateNoteRow(anomaly) {
-    let examplesHTML = '';
-    
-    if (anomaly.Examples) {
-        examplesHTML = anomaly.Examples;
-    } else {
-        for (let example of anomaly.examples) {
-            examplesHTML += `${example}<br>`;
-        }
-    }
-    
-    return `
-        <tr>
-            <td>${anomaly.Issue}</td>
-        </tr>
-    `;
-}
-
-
-function updateFieldLengthInput(fieldTypeDropdown) {
-    const row = fieldTypeDropdown.closest('tr');
-    const associatedFieldLengthInput = row.querySelector('input.field-length-input');
-    const decimalInputsContainer = row.querySelector('.decimal-inputs-container');
-    const decimalInputs = row.querySelectorAll('input.decimal-input');
-    const integerInput = row.querySelector('input.decimal-input[id$="_integer"]');
-    
-    // Check if the inputs exist
-    if (!associatedFieldLengthInput || !decimalInputsContainer) {
-        console.error("Inputs not found!");
-        return;
-    }
-
-    if (fieldTypeDropdown.value === 'Text') {
-        associatedFieldLengthInput.removeAttribute('disabled');
-        associatedFieldLengthInput.setAttribute('required', 'required');
-        associatedFieldLengthInput.value = '50';
-        associatedFieldLengthInput.hidden = false;
-        decimalInputsContainer.hidden = true;
-    } else if (fieldTypeDropdown.value === 'Decimal') {
-        associatedFieldLengthInput.hidden = true;
-        decimalInputsContainer.hidden = false;
-        decimalInputs.forEach(input => {
-            input.hidden = false;
-            if (input !== integerInput) {
-                input.removeAttribute('required'); // ensure only the integer input is required
-            }
-        });
-        integerInput.setAttribute('required', 'required');
-    } else {
-        associatedFieldLengthInput.setAttribute('disabled', 'disabled');
-        associatedFieldLengthInput.removeAttribute('required');
-        associatedFieldLengthInput.hidden = false;
-        decimalInputsContainer.hidden = true;
-
-        // Setting special values for locale, phone, and email fields
-        if (['Locale', 'Phone', 'Email', 'Date'].includes(fieldTypeDropdown.value)) {
-            const lengths = {
-                'Locale': '5',
-                'Phone': '50',
-                'Email': '254',
-                'Date': ''
-            };
-            associatedFieldLengthInput.value = lengths[fieldTypeDropdown.value];
-        }
-    }
-}
-
-
-
-
-
-
-
-
-function updatePrimaryKey(primaryCheckbox) {
-    const allPrimaryCheckboxes = document.querySelectorAll('input[name^="field_primary_"]');
-    const associatedRequiredCheckbox = primaryCheckbox.closest('tr').querySelector('input[name^="field_required_"]');
-
-    if (primaryCheckbox.checked) {
-        allPrimaryCheckboxes.forEach(checkbox => {
-            if (checkbox !== primaryCheckbox) {
-                checkbox.checked = false;
-                checkbox.setAttribute('disabled', 'disabled');
-            }
-        });
-        
-        // Set the associated Required field to checked
-        associatedRequiredCheckbox.checked = true;
-    } else {
-        allPrimaryCheckboxes.forEach(checkbox => {
-            checkbox.removeAttribute('disabled');
-        });
-    }
-}
-
-
-
-
-        // Function to restrict non-numeric input
-function onlyAllowNumericInput(event) {
-    // Allow: backspace, delete, tab, escape, and enter
-    if ([46, 8, 9, 27, 13, 110].indexOf(event.keyCode) !== -1 ||
-        // Allow: Ctrl+A, Command+A
-        (event.keyCode === 65 && (event.ctrlKey === true || event.metaKey === true)) ||
-        // Allow: Ctrl+C, Command+C
-        (event.keyCode === 67 && (event.ctrlKey === true || event.metaKey === true)) ||
-        // Allow: Ctrl+V, Command+V
-        (event.keyCode === 86 && (event.ctrlKey === true || event.metaKey === true)) ||
-        // Allow: Ctrl+X, Command+X
-        (event.keyCode === 88 && (event.ctrlKey === true || event.metaKey === true)) ||
-        // Allow: home, end, left, right
-        (event.keyCode >= 35 && event.keyCode <= 39)) {
-        // Let it happen, don't do anything
-        return;
-    }
-
-    // Ensure that it is a number and stop the keypress if not
-    if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && 
-        (event.keyCode < 96 || event.keyCode > 105)) {
-        event.preventDefault();
-    }
-}
-
-function captureCurrentFormState() {
-
-
-    const fieldNames = [...document.querySelectorAll('[name^="field_name_"]:not([type="hidden"])')].map(input => input.value);
-    const fieldTypes = [...document.querySelectorAll('[name^="field_type_"]:not([type="hidden"])')].map(select => select.value);
-
-    const fieldLengths = {};
-    document.querySelectorAll('.decimal-inputs-container:not([hidden])').forEach(container => {
-        // Get the field name by parsing the id of a sibling input (e.g., field_name_1)
-        const fieldNameInput = container.closest('tr').querySelector('[name^="field_name_"]');
-        const fieldName = fieldNameInput.value;
-
-        // Get the indexes from the input names
-        const integerInput = container.querySelector('[id$="_integer"]');
-        const decimalInput = container.querySelector('[id$="_decimal"]');
-        
-        // Use the field name to create the structure
-        fieldLengths[fieldName] = [
-            integerInput && integerInput.value ? parseInt(integerInput.value, 10) : 0,
-            decimalInput && decimalInput.value ? parseInt(decimalInput.value, 10) : 0
-        ];
-    });
-
-    document.querySelectorAll('[name^="field_lengths_"]:not([hidden]):not([id$="_integer"]):not([id$="_decimal"])').forEach(input => {
-        // Get the field name by parsing the id of a sibling input
-        const fieldNameInput = input.closest('tr').querySelector('[name^="field_name_"]');
-        const fieldName = fieldNameInput.value;
-        
-        fieldLengths[fieldName] = input.value;
-    });
-
-    const fieldRequired = [...document.querySelectorAll('[name^="field_required_"]:not([type="hidden"])')].map(checkbox => checkbox.checked);
-    const fieldPrimaryKey = [...document.querySelectorAll('[name^="field_primary_"]:not([type="hidden"])')].map(checkbox => checkbox.checked);
-
-
-
-    const currentFormState = {
-        field_types: {},
-        field_lengths: {},
-        field_required: {},
-        field_primary_key: {},
-    };
-
-    fieldNames.forEach((fieldName, index) => {
-        currentFormState.field_types[fieldName] = fieldTypes[index];
-        currentFormState.field_lengths[fieldName] = fieldLengths[fieldName];
-        currentFormState.field_required[fieldName] = fieldRequired[index];
-        currentFormState.field_primary_key[fieldName] = fieldPrimaryKey[index];
-    });
-
-
-
-
-    // Store the anomalies_report from the lastImportedData (you can modify this if needed)
-    currentFormState.anomalies_report = lastImportedData ? lastImportedData.anomalies_report : {};
-
-    return currentFormState;
-}
-
-
-function showTooltip(element, message) {
-    // Set the title attribute to the message you want to show
-    element.setAttribute('title', message);
-    
-    // Add data attributes required for the Bootstrap tooltip
-    element.setAttribute('data-toggle', 'tooltip');
-    element.setAttribute('data-placement', 'top');
-    
-    // Initialize the tooltip for this specific element
-    $(element).tooltip('show');
-}
-
-
-
-function hideTooltip(element) {
-    // Destroy the tooltip
-    $(element).tooltip('hide');
-    
-    // Remove the title and data attributes
-    element.removeAttribute('title');
-    element.removeAttribute('data-toggle');
-    element.removeAttribute('data-placement');
-}
-
-function isDuplicateFieldName(fieldName, currentInput) {
-    const allFieldNames = document.querySelectorAll('input[name^="field_name_"]');
-    let duplicateCount = 0;
-
-    allFieldNames.forEach(input => {
-        if (input !== currentInput && input.value === fieldName) {
-            duplicateCount++;
-        }
-    });
-
-    return duplicateCount > 0;
-}
-
-
-document.addEventListener("input", function(event) {
-    if (event.target.matches('input[name^="field_name_"]')) {
-        if (isDuplicateFieldName(event.target.value, event.target)) {
-            // Highlight the input to indicate error
-            event.target.classList.add('is-invalid');
-            
-            // Show tooltip
-            showTooltip(event.target, "Duplicate field name!");
-        } else {
-            // Remove any previous error indication
-            event.target.classList.remove('is-invalid');
-            
-            // Hide tooltip
-            hideTooltip(event.target);
-        }
-    }
-});
-
-
-function checkFileSize(inputElement) {
-    const maxFileSizeMB = 2;
-    if (inputElement.files && inputElement.files[0]) {
-        const fileSize = inputElement.files[0].size / 1024 / 1024; // size in MB
-        if (fileSize > maxFileSizeMB) {
-            inputElement.classList.add('is-invalid');
-            displayError("File size is too large!", `Max size is ${maxFileSizeMB} MB.`);
-            return false;
-        } else {
-            inputElement.classList.remove('is-invalid');
-        }
-    }
-    return true;
-}
-
-
-function initializeSwitchBehavior() {
-    const retentionSwitch = document.getElementById("retentionSwitch");
-    const retentionPolicyDiv = document.getElementById("retentionPolicySettings");
-    const periodLengthInput = document.querySelector('input[name="periodLength"]');
-
-    if (retentionSwitch) {
-        // Directly apply the switch state
-        reflectSwitchState();
-        
-        // Handle switch change
-        retentionSwitch.addEventListener("change", reflectSwitchState);
-    }
-}
-
-
-function reflectSwitchState() {
-    const retentionSwitch = document.getElementById("retentionSwitch");
-    const retentionPolicyDiv = document.getElementById("retentionPolicySettings");
-    const periodLengthInput = document.querySelector('input[name="periodLength"]');
-
-    if (retentionSwitch.checked) {
-        retentionPolicyDiv.style.display = "block";
-        periodLengthInput.required = true;
-    } else {
-        retentionPolicyDiv.style.display = "none";
-        periodLengthInput.required = false;
-    }
-}
-
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const resetOnImportCheckbox = document.getElementById("resetOnImport");
-
-    resetOnImportCheckbox.setAttribute("disabled", true);
-
-    const retentionSwitch = document.getElementById("retentionSwitch");
-
-    // Handle switch change
-    if (retentionSwitch) {
-        retentionSwitch.addEventListener("change", reflectSwitchState);
-    }
-
-    // Check the initial state of the switch and display content accordingly
-    reflectSwitchState();
-
-
-
-
-
-          
-
-    const fieldTypeDropdowns = document.querySelectorAll('select[name^="field_type_"]');
-
-    fieldTypeDropdowns.forEach(dropdown => {
-    updateFieldLengthInput(dropdown);  // update inputs based on the dropdown value
-    if (dropdown.value === 'Text') {
-        const row = dropdown.closest('tr');
-        const fieldLengthInput = row.querySelector('input.field-length-input');
-        fieldLengthInput.value = '50';
-    }
-});
-
-function initializeFormEvents() {
-    const saveForm = document.getElementById("save_form");
-    const saveButton = document.querySelector('.save_button');
-    const goBackbutton = document.querySelector('#go_back');
-
-
-    if (!initialFormState) {
-        initialFormState = saveForm.innerHTML;  // Store the initial form state
-    }
-
-    if (!saveForm._isEventListenerAdded) {
-        saveButton.addEventListener("click", handleSaveButtonClick(saveForm));
-
-        goBackbutton.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent any default behavior.
-    handleGoBackClick(saveForm);
-});
-        saveForm._isEventListenerAdded = true;  // Mark the form as having the event listener
-    }
-}
-
-function handleSaveButtonClick(saveForm) {
-    return function(event) {
-        event.preventDefault();
-        let formData = new FormData(saveForm);
-        const retentionSwitch = document.getElementById("retentionSwitch");
-
-
-        lastSavedFormState.switchState = document.getElementById("retentionSwitch").checked;
-        lastSavedFormState.periodLength = document.querySelector('input[name="periodLength"]').value;
-        lastSavedFormState.periodUnit = document.querySelector('select[name="periodUnit"]').value;
-        lastSavedFormState.dataRetentionStrategy = document.querySelector('input[name="dataRetentionStrategy"]:checked').value;
-        lastSavedFormState.retentionPeriod = document.querySelector('input[name="retentionPeriod"]:checked').value;
-        lastSavedFormState.resetOnImport = document.getElementById('resetOnImport').checked;
-        lastSavedFormState.retentionDate = document.querySelector('input[name="retentionDate"]').value;
-        lastSavedFormState.name = document.getElementById("name").value;
-        lastSavedFormState.customerKey = document.getElementById("customerKey").value;
-
-    if (!retentionSwitch.checked) {
-        formData.delete('periodLength');
-        formData.delete('periodUnit');
-        formData.delete('dataRetentionStrategy');
-        formData.delete('retentionPeriod');
-        formData.delete('retentionDate');
-        formData.delete('resetOnImport');
-    }
-
-
-
-    let isValid = true;  // Default validation state
-    let firstInvalidElement = null;
-    lastImportedData = captureCurrentFormState();
-
-    // Get all input elements inside the form
-    const inputElements = saveForm.querySelectorAll('input,select,textarea');
-
-    // Iterate over each input element
-    inputElements.forEach(input => {
-        if (!input.checkValidity()) {
-            isValid = false;
-            if (!firstInvalidElement) {
-                firstInvalidElement = input;  // Set the first invalid element
-            }
-
-            if (input.validity.valueMissing) {
-                // Field is required and is missing a value
-                showTooltip(input, 'This field is required.');
-            } else {
-                // Other validation errors can be handled here, if needed
-                showTooltip(input, 'Invalid input.');
-            }
-        } else {
-            hideTooltip(input);  // Hide the tooltip if it was previously shown
-        }
-    });
-
-    // If there's an invalid element, scroll to it smoothly
-    if (firstInvalidElement) {
-        firstInvalidElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'  // 'center' will place the invalid field in the center of the viewport
-        });
-    }
-
-    // If the form is not valid, simply return
-    if (!isValid) {
-        return;
-    }
-
-    const data_retention = document.querySelector('#data_retention');
-    const data_extension_properties = document.querySelector('#data_extension_properties');
-    const save_form = document.querySelector('#save_form');
-    const field_data = document.querySelector('#field_data_div');
-    const notes = document.querySelector('#notes_div');
-    const goBackbutton = document.querySelector('#go_back');
-
-
-
-    fetch("/save_field_data/", {
-        method: "POST",
-        body: formData,
-        headers: {
-            "X-Requested-With": "XMLHttpRequest"
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        data_retention.style.display = "none";
-        data_extension_properties.style.display = "none";
-        save_form.style.display = "none";
-        field_data.style.display = "none";
-        notes.style.display = "none";
-        goBackbutton.style.display = "block";
-
-    if (data.status === "error") {
-        let errorMessage = data.message;
-
-        if (errorMessage.includes("Updating an existing Data Extension definition is not allowed when doing an add-only operation.")) {
-            errorMessage = "The name or customer key used for the creation of this DE is already in use.";
-        }
-
-        displayError("Please review the following error:", errorMessage); 
-
-        } else {
-            displaySuccess("The data extension has been created in your Data Extensions folder.", "Drag and drop a new file there to start over");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-
-
-    };
-}
-
-function handleGoBackClick(saveForm) {
-    if (initialFormState) {
-        saveForm.innerHTML = initialFormState;
-    } else {
-        saveForm.reset();  // Consider using the form's reset method as an alternative
-    }
-
-    if (lastImportedData) {
-        populateData(
-            lastImportedData.field_types, 
-            lastImportedData.field_lengths, 
-            lastImportedData.anomalies_report,
-            lastImportedData.field_required,
-            lastImportedData.field_primary_key
-        );
-    }
-
-
-    const specificDateRadio = document.getElementById("specificDate");
-    const retentionDateInput = document.querySelector('input[name="retentionDate"]');
-
-    // Check and update the state based on lastSavedFormState
-    if (lastSavedFormState.retentionPeriod === 'specificDate') {
-        specificDateRadio.checked = true;
-        specificDateRadio.disabled = false; // Enable the radio button
-        retentionDateInput.disabled = false; // Enable the date input field
-        retentionDateInput.value = lastSavedFormState.retentionDate;
-    } else {
-        specificDateRadio.checked = false;
-
-    }
-
-    initializeSwitchBehavior();
-    document.getElementById("retentionSwitch").checked = lastSavedFormState.switchState;
-    document.querySelector('input[name="periodLength"]').value = lastSavedFormState.periodLength;
-    document.querySelector('select[name="periodUnit"]').value = lastSavedFormState.periodUnit;
-    document.querySelector(`input[name="dataRetentionStrategy"][value="${lastSavedFormState.dataRetentionStrategy}"]`).checked = true;
-    document.querySelector(`input[name="retentionPeriod"][value="${lastSavedFormState.retentionPeriod}"]`).checked = true;
-    document.getElementById('resetOnImport').checked = lastSavedFormState.resetOnImport;
-    document.getElementById("name").value = lastSavedFormState.name;
-    document.getElementById("customerKey").value = lastSavedFormState.customerKey;
-    reflectSwitchState();
-    attachEventListenersForForm();
-
-    const elementsToHide = [
-        '#go_back'
-    ];
-    
-    const elementsToShow = [
-        '#save_form',
-        '#data_retention',
-        '#data_extension_properties',
-        '#field_data_div',
-        '#notes_div'
-    ];
-    
-    elementsToHide.forEach(selector => {
-        document.querySelector(selector).style.display = 'none';
-    });
-    
-    elementsToShow.forEach(selector => {
-        document.querySelector(selector).style.display = 'block';
-    });
-
-    saveForm._isEventListenerAdded = false; 
-
-    initializeFormEvents();
-}
-
-initializeFormEvents();
-
-
-
-
-
-    function attachEventListener(id, callback) {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener("change", callback);
-        }
-    }
-
-function attachEventListenersForForm() {
-
-    // Use the attachEventListener function for each of your elements:
-    attachEventListener("specificDate", function() {
-        if(this.checked) {
-            document.querySelector('input[name="retentionDate"]').setAttribute("required", true);
-            document.querySelector('input[name="retentionPeriod"]').removeAttribute("required");
-            document.querySelector('input[name="periodLength"]').removeAttribute("required");
-        } 
-    });
-
-    attachEventListener("afterPeriod", function() {
-        document.querySelector('input[name="retentionDate"]').removeAttribute("required");
-        document.querySelector('input[name="periodLength"]"]').setAttribute("required", true);
-    });
-
-    attachEventListener("allRecordsDataExtensions", function() {
-        document.querySelector('input[name="retentionDate"]').removeAttribute("required");
-    });
-
-    attachEventListener("allRecords", function() {
-        document.querySelector('input[name="retentionDate"]').removeAttribute("required");
-    });
-
-    attachEventListener("individualRecords", function() {
-        const resetOnImportCheckbox = document.getElementById("resetOnImport");
-        const specificDateRadio = document.getElementById("specificDate");
-        const retentionDateInput = document.querySelector('input[name="retentionDate"]');
-        resetOnImportCheckbox.setAttribute("disabled", true);
-        
-        if(this.checked) {
-            resetOnImportCheckbox.setAttribute("disabled", true);
-            specificDateRadio.setAttribute("disabled", true);
-            retentionDateInput.setAttribute("disabled", true);
-        } else {
-            resetOnImportCheckbox.removeAttribute("disabled");
-            specificDateRadio.removeAttribute("disabled");
-            retentionDateInput.removeAttribute("disabled");
-        }
-    });
-
-    function enableAllRecordsAndExtensionsFields() {
-        const resetOnImportCheckbox = document.getElementById("resetOnImport");
-        const specificDateRadio = document.getElementById("specificDate");
-        const retentionDateInput = document.querySelector('input[name="retentionDate"]');
-
-        resetOnImportCheckbox.removeAttribute("disabled");
-        specificDateRadio.removeAttribute("disabled");
-        retentionDateInput.removeAttribute("disabled");
-    }
-
-    attachEventListener("allRecordsDataExtensions", enableAllRecordsAndExtensionsFields);
-    attachEventListener("allRecords", enableAllRecordsAndExtensionsFields);
-
-}
-
-attachEventListenersForForm();
-
-});
-
-
-
-
-window.addEventListener("pageshow", function() {
-    // Check the initial state of the switch and display content accordingly
-    reflectSwitchState();
-});
-    
-
-
-
-    </script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="main.js"></script>
 
 </head>
 <body>
 
 <div class="bg-red-shade position-absolute w-100 h-50">
     <img src="https://www.redpill-linpro.com/themes/custom/cerpus_base/logo.svg" alt="Your Logo" class="logo">
-
     <!-- Centered content -->
     <div class="center-content">
         <h1>Data Extension ImportEase</h1>
@@ -1366,207 +29,164 @@ window.addEventListener("pageshow", function() {
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="main-wrapper" id ="main-wrapper"> 
+            <div class="main-wrapper" id="main-wrapper">
                 <form method="post" enctype="multipart/form-data" class="mb-4" id="uploadForm">
                     <input type="hidden" name="form_identifier" value="form1">
-
                     <input type="hidden" name="csrfmiddlewaretoken" id="csrfTokenInput" value="{{ csrf_token }}">
                     <div class="form-group">
                         <div class="white-rounded">
                             <div class="drag-drop-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
-                        <div class="loading-message">Your file is being analyzed...</div>
-                    <div class="error-message">
-    <i class="bi bi-x-circle-fill text-danger"></i>
-    <div class="mt-2">
-        <h4 id="error-title" class="text-danger"></h4>
-        <p id="error-message"></p>
-    </div>
-</div>
-<div class="success-message">
-    <i class="bi bi-check-circle-fill text-success"></i>
-    <div class="mt-2">
-        <h4 id="success-title" class="text-success"></h4>
-        <p id="success-message"></p>
-    </div>
-</div>
-                        <div class="drag-drop-content">
-                            <div class="drag-drop-icon">
-    <i class="bi bi-upload"></i>
-</div>
-                            <h2 class="drag-drop-title">Please drag and drop your file here to create your data extension</h2>
-                            {% for field in form %}
-                                <input type="file" name="{{ field.name }}" id="{{ field.auto_id }}" class="file-input">
-                            {% endfor %}
+                                <div class="loading-message">Your file is being analyzed...</div>
+                                <div class="error-message">
+                                    <i class="bi bi-x-circle-fill text-danger"></i>
+                                    <div class="mt-2">
+                                        <h4 id="error-title" class="text-danger"></h4>
+                                        <p id="error-message"></p>
+                                    </div>
+                                </div>
+                                <div class="success-message">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    <div class="mt-2">
+                                        <h4 id="success-title" class="text-success"></h4>
+                                        <p id="success-message"></p>
+                                    </div>
+                                </div>
+                                <div class="drag-drop-content">
+                                    <div class="drag-drop-icon">
+                                        <i class="bi bi-upload"></i>
+                                    </div>
+                                    <h2 class="drag-drop-title">Please drag and drop your file here to create your data extension</h2>
+                                    {% for field in form %}
+                                        <input type="file" name="{{ field.name }}" id="{{ field.auto_id }}" class="file-input">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <p style="margin-top:10px">
+                                Only .txt and .csv files • Up to 2 MB
+                            </p>
+                            <div style="padding-top: 20px; padding-left: 10px;">
+                                <button class="btn btn-primary" id="go_back" type="button" style="display: none;">Go Back</button>
                             </div>
                         </div>
-                        <p style="margin-top:10px">
-Only .txt and .csv files • Up to 2 MB
-</p>
-<div style="padding-top: 20px; padding-left: 10px;">
-<button class="btn btn-primary" id="go_back" type="button" style="display: none;">Go Back</button>
-
-
-
-</div>
                     </div>
-                    </div>
-                    </form>
-   
+                </form>
 
-
-<div style="display:none" id="notes_div">
-<h2 id="notes-section" style="padding-top:50px;padding-bottom:15px;">Notes</h2>
-    <table class="table table-bordered table-hover">
-        <thead class="thead-secondary">
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>     
-
-
-<form method="post" action="/save_field_data/" id="save_form" class="mb-4" enctype="multipart/form-data" style="display: none;">
-    <input type="hidden" name="form_identifier" value="form2">
-
-<input type="hidden" name="csrfmiddlewaretoken" id="csrfTokenInput" value="{{ csrf_token }}">
-
-<div id="data_extension_properties" style="display: none;">
-<h2 style="padding-top:50px;padding-bottom:15px;">Data Extension Properties</h2>
-
-<div class="rounded-rectangle">
-    <!-- New fields: name and customerKey -->
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" class="form-control" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="customerKey">Customer Key(External Key)</label>
-        <input type="text" id="customerKey" name="customerKey" class="form-control">
-        <p class="lightgray-text">
-            Optional. If left empty, SFMC will provide a random Customer Key.
-        </p>
-    </div>
-</div>
-</div>
-
-
-<div id="data_retention" style="display: none;">
-<!-- Data Retention Section -->
-    <h2 class="mt-4" style="padding-top:50px;padding-bottom:15px;">Data Retention</h2>
-
-    <!-- 1. Retention Setting On-Off Switch -->
-<div class="custom-control custom-switch mb-4">
-    <input type="checkbox" class="custom-control-input" id="retentionSwitch">
-    <label class="custom-control-label" for="retentionSwitch">Enable Retention Setting</label>
-</div>
-
-<div id="retentionPolicySettings" style="display:none;">
-    <!-- 2. Radio Buttons for Data Retention Strategy -->
-    <div class="card mb-3">
-        <div class="card-body">
-            <label style="font-weight: 700;padding-top: 10px;padding-bottom: 10px;">Delete</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="individualRecords" value="individual" required checked>
-                <label class="form-check-label" for="individualRecords">Individual Records</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="allRecordsDataExtensions" value="allDataExtensions" required>
-                <label class="form-check-label" for="allRecordsDataExtensions">All Records and data extensions</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="allRecords" value="allRecords" required>
-                <label class="form-check-label" for="allRecords">All records</label>
-            </div>
-        </div>
-    </div>
-
- <!-- 3. Retention Period Radio Buttons -->
-    <div class="card">
-        <div class="card-body">
-            <label style="font-weight: 700;padding-top: 10px;padding-bottom: 10px;">Retention Period</label>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="retentionPeriod" id="afterPeriod" value="afterPeriod" required checked>
-                    <label class="form-check-label mr-2" for="afterPeriod">After</label>
-                    <input type="number" class="form-control-inline mr-2" name="periodLength" value="" style="border: 1px solid #ced4da;border-radius: 0.25rem;width: 10%;padding-left: 10px;height: 40px;">
-                    <select class="form-control" name="periodUnit" style="border: 1px solid #ced4da;border-radius: 0.25rem;width: 15%;height: 40px;">
-                        <option value="Days">Days</option>
-                        <option value="Weeks">Weeks</option>
-                        <option value="Months">Months</option>
-                        <option value="Years">Years</option>
-                    </select>
+                <div style="display:none" id="notes_div">
+                    <h2 id="notes-section" style="padding-top:50px;padding-bottom:15px;">Notes</h2>
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-secondary">
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-<div class="align-checkbox">
-    <div class="form-check" style="padding-left: 2% !important;">
-        <input type="checkbox" class="form-check-input" id="resetOnImport" name="resetOnImport">
-        <label class="form-check-label" for="resetOnImport">Reset period on import</label>
-    </div>
-</div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="retentionPeriod" id="specificDate" value="specificDate" required disabled>
-                <label class="form-check-label mr-2" for="specificDate">On</label>
-                <input type="date" class="form-control-inline" name="retentionDate" required disabled>
+
+                <form method="post" action="/save_field_data/" id="save_form" class="mb-4" enctype="multipart/form-data" style="display: none;">
+                    <input type="hidden" name="form_identifier" value="form2">
+                    <input type="hidden" name="csrfmiddlewaretoken" id="csrfTokenInput" value="{{ csrf_token }}">
+                    <div id="data_extension_properties" style="display: none;">
+                        <h2 style="padding-top:50px;padding-bottom:15px;">Data Extension Properties</h2>
+                        <div class="rounded-rectangle">
+                            <!-- New fields: name and customerKey -->
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerKey">Customer Key(External Key)</label>
+                                <input type="text" id="customerKey" name="customerKey" class="form-control">
+                                <p class="lightgray-text">Optional. If left empty, SFMC will provide a random Customer Key.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="data_retention" style="display: none;">
+                        <!-- Data Retention Section -->
+                        <h2 class="mt-4" style="padding-top:50px;padding-bottom:15px;">Data Retention</h2>
+                        <!-- 1. Retention Setting On-Off Switch -->
+                        <div class="custom-control custom-switch mb-4">
+                            <input type="checkbox" class="custom-control-input" id="retentionSwitch">
+                            <label class="custom-control-label" for="retentionSwitch">Enable Retention Setting</label>
+                        </div>
+                        <div id="retentionPolicySettings" style="display:none;">
+                            <!-- 2. Radio Buttons for Data Retention Strategy -->
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <label style="font-weight: 700;padding-top: 10px;padding-bottom: 10px;">Delete</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="individualRecords" value="individual" required checked>
+                                        <label class="form-check-label" for="individualRecords">Individual Records</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="allRecordsDataExtensions" value="allDataExtensions" required>
+                                        <label class="form-check-label" for="allRecordsDataExtensions">All Records and data extensions</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dataRetentionStrategy" id="allRecords" value="allRecords" required>
+                                        <label class="form-check-label" for="allRecords">All records</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 3. Retention Period Radio Buttons -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <label style="font-weight: 700;padding-top: 10px;padding-bottom: 10px;">Retention Period</label>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="retentionPeriod" id="afterPeriod" value="afterPeriod" required checked>
+                                        <label class="form-check-label mr-2" for="afterPeriod">After</label>
+                                        <input type="number" class="form-control-inline mr-2" name="periodLength" value="" style="border: 1px solid #ced4da;border-radius: 0.25rem;width: 10%;padding-left: 10px;height: 40px;">
+                                        <select class="form-control" name="periodUnit" style="border: 1px solid #ced4da;border-radius: 0.25rem;width: 15%;height: 40px;">
+                                            <option value="Days">Days</option>
+                                            <option value="Weeks">Weeks</option>
+                                            <option value="Months">Months</option>
+                                            <option value="Years">Years</option>
+                                        </select>
+                                    </div>
+                                    <div class="align-checkbox">
+                                        <div class="form-check" style="padding-left: 2% !important;">
+                                            <input type="checkbox" class="form-check-input" id="resetOnImport" name="resetOnImport">
+                                            <label class="form-check-label" for="resetOnImport">Reset period on import</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="retentionPeriod" id="specificDate" value="specificDate" required disabled>
+                                        <label class="form-check-label mr-2" for="specificDate">On</label>
+                                        <input type="date" class="form-control-inline" name="retentionDate" required disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:none" id="field_data_div">
+                        <h2 class="mt-4" style="padding-top:50px;padding-bottom:15px;">Field Data</h2>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th> <!-- Space for add row icon -->
+                                    <th style="min-width: 100px;">Field Name</th>
+                                    <th style="min-width: 150px;">Field Type</th>
+                                    <th style="min-width: 50px;">Field Length</th>
+                                    <th style="min-width: 100px;">Required?</th>
+                                    <th style="min-width: 100px;">Primary&nbsp;Key?</th>
+                                    <th></th> <!-- Space for remove row icon -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="save_button_div">
+                        <button type="button" class="btn btn-success save_button">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-</div>
-
-<div style="display:none" id="field_data_div">
-<h2 class="mt-4" style="padding-top:50px;padding-bottom:15px;">Field Data</h2>
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th></th> <!-- Space for add row icon -->
-            <th style="min-width: 100px;">Field Name</th>
-            <th style="min-width: 150px;">Field Type</th>
-            <th style="min-width: 50px;">Field Length</th>
-            <th style="min-width: 100px;">Required?</th>
-            <th style="min-width: 100px;">Primary&nbsp;Key?</th>
-            <th></th> <!-- Space for remove row icon -->
-        </tr>
-    </thead>
-        <tbody>
-            
-
-        </tbody>
-    </table>
-
-</div>
-<div class="save_button_div"> <button type="button" class="btn btn-success save_button">Submit</button></div>
-   
-</form>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </body>
-<script>
-    
-
-document.addEventListener("DOMContentLoaded", function() {
-    const tableElem = document.querySelector('.table');
-    if (tableElem) {
-        tableElem.addEventListener('change', function(event) {
-            if (event.target.name && event.target.name.startsWith('field_type_')) {
-                updateFieldLengthInput(event.target);
-            }
-            // ... other delegated events for table elements if needed
-        });
-    }
-});
-
-$(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-</script>
-    </html>
+</html>

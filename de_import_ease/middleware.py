@@ -25,7 +25,7 @@ class AuthorizationMiddleware:
             return response
 
         # Check for direct access to homepage
-        if request.path == '/':  # Assuming that `/` is the homepage URL
+        if request.path == '/':  
             if code:
                 request.session['authenticated'] = True
                 mc_instance.process_authorization_code(code)

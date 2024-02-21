@@ -1,0 +1,373 @@
+
+.drag-drop-area {
+    padding: 70px 70px;  /* Increase vertical padding for more central positioning */
+    border: 4px dashed #ccc;
+    text-align: center;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+    height: 300px;  /* Added fixed height to ensure consistency */
+    border-radius: 15px; 
+}
+
+.drag-drop-area:hover {
+    background-color: #f8f9fa;
+}
+
+.drag-drop-title {
+    font-size: 28px;  /* Increase font size */
+    font-weight: bold;
+    margin-top: -30px;  /* Adjust margin to center text more */
+}
+
+.h-50 {
+    height: 50% !important;
+}
+
+
+.decimal-inputs-container {
+    display: flex;
+    gap: 10px;
+    width: auto;       /* Ensure it occupies the full width of its container */
+    overflow: hidden;  /* Hide any child elements that overflow the container */
+}
+
+.decimal-input {
+    width: 70px !important;  /* Adjust this width as needed to fit both inputs */
+    flex: none;
+}
+
+thead th {
+    background-color: #ededed !important;
+    color:#212529;
+}
+
+/* Make table data cells white */
+td {
+    background-color: white;
+}
+
+/* Change the background color of header and data cells to light gray when hovered over */
+tr:hover th, tr:hover td {
+    background-color: #ededed !important;
+}
+
+/* New/Updated styles for rounded border */
+.table {
+    border-collapse: separate; /* Resets to default value; essential for border-spacing to work */
+    border-spacing: 0; /* Eliminates spacing between cells */
+    border: 2px solid darkgray; /* This creates a border around the table */
+    border-radius: 10px;
+}
+
+.table th, .table td {
+    padding-bottom: 20px !important;
+    padding-top: 25px !important;
+    line-height: 170% !important;
+    padding-left: 15px !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #be3134 !important;
+    background-color:  #be3134 !important;
+}
+
+.form-check-input[type="radio"] {
+    position: relative;
+    appearance: none;   /* Remove default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #be3134;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-check-label {
+    padding-left: 10px !important;
+}
+
+
+.form-check-input[type="radio"]:not(:checked) {
+    border-color: black !important;  /* For unchecked radios */
+}
+
+.form-check-input[type="radio"]:checked {
+    border-color: #be3134 !important;  /* Border color when checked */
+    background-color: transparent;
+}
+
+.form-check-input[type="radio"]:checked::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #be3134 !important;  /* Inner circle color when selected */
+}
+
+.form-check-input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #be3134 !important;  /* Inner circle color when checked */
+}
+
+
+/* These handle the rounded corners for the table */
+.table thead th:first-child {
+    border-top-left-radius: 10px; 
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.table-bordered thead th {
+    border-bottom: none; /* This removes the double border between header and body cells */
+}
+
+.form-check {
+    padding-bottom: 10px !important;
+        display: flex !important;
+    align-items: center; /* Vertical centering */
+}
+
+#resetOnImport {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-top: -3px; /* To help with vertical alignment */
+}
+
+.align-checkbox {
+    margin-left: 80px; /* Adjust this value based on the exact left offset of the periodLength textbox */
+}
+
+
+
+.loading-message {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+.error-message {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    text-align: center;  /* center the text and the icon */
+}
+
+.bi-x-circle-fill {
+    font-size: 40px; /* Increase the size of the ban icon */
+}
+
+.bi-check-circle-fill {
+    font-size: 50px; /* Increase the size of the ban icon */
+}
+
+    /* Logo Styling */
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 150px; /* Adjust as necessary */
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Centered content within the red shape */
+.center-content {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering method */
+    text-align: center; /* Align the text to the center */
+    z-index: 2; /* Ensure it's above the red shape */
+}
+
+.center-content h1 {
+    color: white; /* Adjust as needed */
+    font-size: 24px; /* Adjust as needed */
+    margin-bottom: 15px; /* Space between the title and the paragraph */
+}
+
+.center-content p {
+    color: white; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    margin: 0 auto; /* Center the paragraph if it's narrower than the container */
+}
+
+.file-input {
+     display: none;
+}
+
+button, input, select, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #dae1e7;
+    margin: 0;  /* Ensures no default margin/padding on the body */
+
+}
+
+.save_button_div {
+    width: 100%;
+    height: 160px;
+    padding-top: 45px;
+    padding-bottom: 50px;
+}
+
+.save_button_div .save_button {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px !important; /* Or whatever you want */
+    padding: 10px 20px; /* Adjust the padding to make the button text/contents look centered */
+    color: #fff;
+    background: linear-gradient(to right, #be3134, #ff645a) !important;
+    border-color: #be3134 !important;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.main-wrapper {
+    position: relative; 
+    min-height: 600px; /* or whatever height you find suitable */
+    height: calc(100vh - 20px); 
+}
+
+.white-rounded {
+    background-color: white;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 80px;  /* Increased padding to 80px */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2; /* Make sure it stays on top of the red shape */
+    margin-top: 90px; /* push the white box lower */
+    width: calc(100% - 60px);
+}
+
+
+.bg-red-shade {
+    background: linear-gradient(to bottom right, #be3134 0%, #f64d50 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1; /* Positioned behind the white box */
+    height: calc(100vh - 65%); /* slightly increased the height */
+    position: relative; /* make it a reference for the pseudo-element */
+    overflow: hidden; /* hide the overflow to ensure the pseudo-element doesn't extend beyond */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 70% 100%, 30% 100%, 0% 85%);
+}
+
+.bg-red-shade::after {
+    content: "";
+    position: absolute;
+    bottom: -25px; /* adjust this to move the circular element up or down */
+    left: 25%;  /* adjust this to move the circular element left or right */
+    right: 25%; /* adjust together with the left property to control the width of the circle */
+    height: 50px; /* control the height of the circle */
+    border-radius: 50%; /* make it circular */
+    z-index: 2; /* ensures it's above the red-shade but below the white-rounded */
+}
+
+.drag-drop-icon {
+    font-size: 40px; /* Adjust size as per your needs */
+    color: #333; /* Adjust color as per your needs */
+    text-align: center; /* Center the icon */
+    margin-bottom: 40px; /* Spacing between the icon and the title */
+}
+
+.pin {
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+}
+.pin-y {
+    top: 0;
+    bottom: 0;
+}
+
+.rounded-rectangle {
+    border: 2px solid #dee2e6 !important; /* Change the color as needed */
+    border-radius: 10px; /* Adjust as needed */
+    padding: 20px; /* Add some space inside the rectangle */
+    margin-bottom: 20px; /* Optional: adds some space below the rectangle */
+}
+
+#go_back {color: black;
+    display: block;
+    background-color: transparent;
+    border-color: black;
+    border: 2px solid #dee2e6 !important;
+    border-radius: 10px;
+    width: 150px;}
+
+.lightgray-text {
+    font-size: 0.8em;      /* Makes text size smaller */
+    color: #898b8d;     /* Makes text color light gray */
+    margin-top: 0.5em;    /* Add a little spacing on top for better visual separation */
+}
+
+
+.absolute {
+    position: absolute;
+}
+
+.success-message {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    text-align: center;
+}
+
+
+h1, h2 {
+    font-weight: 700; /* bold */
+}
+
+h3, h4 {
+    font-weight: 500; /* medium */
+}
+
+p, span, a {
+    font-weight: 400; /* regular */
+}
