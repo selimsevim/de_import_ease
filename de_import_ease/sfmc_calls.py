@@ -36,7 +36,7 @@ class MarketingCloud:
             'response_type': 'code',
             'client_id': self.client_id,
             'redirect_uri': 'https://de-import-ease-0d07ab40f787.herokuapp.com',
-            'scope': 'data_extensions_read data_extensions_write',
+            'scope': 'data_extensions_write',
             'state': 'active'
         }
         authorization_url = f"{auth_url}?{urlencode(params)}"
@@ -95,7 +95,6 @@ class MarketingCloud:
     def is_token_expired(self):
         print(self.token_expiry_time)
         if not self.token_expiry_time:
-            print("test")
             return True
         return datetime.now() > self.token_expiry_time
 
