@@ -51,7 +51,7 @@ class MarketingCloud:
         "client_id": self.client_id,
         "client_secret": self.client_secret,
         "redirect_uri": "https://de-import-ease-0d07ab40f787.herokuapp.com",
-        "scope": "data_extensions_read data_extensions_write"
+        "scope": "data_extensions_write"
         }
 
 
