@@ -54,4 +54,9 @@ With these configurations, the app is ready for use.
 
 Data Extension Import Ease is open-sourced under the MIT License. See the LICENSE file for more details.
 
+## Thanks
+
+For supporting me from the start to end, I must say thanks to Alexander Mellbin and Erik Ivarsson.
+For UI part, I must say thanks to Isabella Enryd for her feedback. 
+
 ---
