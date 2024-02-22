@@ -56,7 +56,6 @@ Data Extension Import Ease is open-sourced under the MIT License. See the LICENS
 
 ## Thanks
 
-For supporting me from the start to end, I must say thanks to Alexander Mellbin and Erik Ivarsson.
-For UI part, I must say thanks to Isabella Enryd for her feedback. 
+I extend my deepest gratitude to Alexander Mellbin and Erik Ivarsson for their unwavering support throughout this entire journey. For the invaluable insights into the UI, special thanks go to Isabella Enryd, whose feedback was instrumental in refining the user experience.
 
 ---
