@@ -8,6 +8,10 @@ from django.shortcuts import redirect
 
 class MarketingCloud:
 
+    # Class level variables for constants
+    REDIRECT_URI = os.environ.get('HEROKU_DOMAIN', 'default-domain.herokuapp.com')
+    scope = 'data_extensions_write'
+
     _instance = None
     _initialized = False
 
@@ -35,8 +39,8 @@ class MarketingCloud:
         params = {
             'response_type': 'code',
             'client_id': self.client_id,
-            'redirect_uri': 'https://de-import-ease-0d07ab40f787.herokuapp.com',
-            'scope': 'data_extensions_write',
+            'redirect_uri': f'https://{self.REDIRECT_URI}',
+            'scope': self.scope,
             'state': 'active'
         }
         authorization_url = f"{auth_url}?{urlencode(params)}"
@@ -50,8 +54,8 @@ class MarketingCloud:
         "code": code,
         "client_id": self.client_id,
         "client_secret": self.client_secret,
-        "redirect_uri": "https://de-import-ease-0d07ab40f787.herokuapp.com",
-        "scope": "data_extensions_write"
+        "redirect_uri": f'https://{self.REDIRECT_URI}',
+        "scope": self.scope
         }
 
 

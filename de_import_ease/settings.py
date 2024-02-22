@@ -8,7 +8,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = ['de-import-ease-0d07ab40f787.herokuapp.com']
+HEROKU_DOMAIN = os.environ.get('HEROKU_DOMAIN', 'default-domain.herokuapp.com')
+ALLOWED_HOSTS = [HEROKU_DOMAIN, '127.0.0.1', 'localhost']
+
 
 # ============================================
 # APP & MIDDLEWARE CONFIGURATION
@@ -80,10 +82,10 @@ SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'None'
 
 
-CSRF_TRUSTED_ORIGINS = ['https://*.exacttarget.com', 'https://de-import-ease-0d07ab40f787.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = [f'https://*.exacttarget.com', f'https://{HEROKU_DOMAIN}']
+CSRF_COOKIE_DOMAIN = HEROKU_DOMAIN
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_DOMAIN = 'de-import-ease-0d07ab40f787.herokuapp.com'
 CSRF_COOKIE_SAMESITE = 'None'
 SECURE_SSL_REDIRECT = True
 REFERRER_POLICY = 'origin-when-cross-origin'
