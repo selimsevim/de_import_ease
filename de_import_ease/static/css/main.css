@@ -236,7 +236,6 @@ button, input, select, textarea {
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #dae1e7;
     margin: 0;  /* Ensures no default margin/padding on the body */
 
 }
